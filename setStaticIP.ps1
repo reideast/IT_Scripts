@@ -10,9 +10,10 @@ $dns = "8.8.8.8","8.8.4.4"
 $gateway = "10.0.0.1"
 
 #remove previous IP settings (will only run if they exist)
-Remove-NetIPAddress -InterfaceAlias $alias_eth0 -IPAddress $ip_eth0
-Remove-NetIPAddress -InterfaceAlias $alias_wifi -IPAddress $ip_wifi
-Remove-NetRoute -DestinationPrefix 0.0.0.0/0
+#uses -Confirm:$false to automatically answer "Y" to confirmation prompts
+Remove-NetIPAddress -InterfaceAlias $alias_eth0 -IPAddress $ip_eth0 -confirm:$false
+Remove-NetIPAddress -InterfaceAlias $alias_wifi -IPAddress $ip_wifi -confirm:$false
+Remove-NetRoute -DestinationPrefix 0.0.0.0/0 -confirm:$false
 
 #set eth0 ip/dns
 New-NetIPAddress -InterfaceAlias $alias_eth0 -AddressFamily IPv4 -IPAddress $ip_eth0 -PrefixLength 26 
