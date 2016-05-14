@@ -30,4 +30,8 @@ New-NetRoute -DestinationPrefix 0.0.0.0/0 -InterfaceAlias $alias_wifi -NextHop $
 New-NetRoute -DestinationPrefix 0.0.0.0/0 -InterfaceAlias $alias_eth0 -NextHop $gateway -RouteMetric 256
 
 # DEBUG
+Write-Host "Settings changed to:"
+Get-NetIPAddress -InterfaceAlias $alias_eth0,$alias_wifi -AddressFamily IPv4  | Format-Table ifIndex, InterfaceAlias, IPAddress, PrefixLength, AddressState
+Get-DnsClientServerAddress -InterfaceAlias $alias_eth0,$alias_wifi -AddressFamily IPv4 | Format-Table InterfaceIndex, InterfaceAlias, ServerAddresses
+
 pause
